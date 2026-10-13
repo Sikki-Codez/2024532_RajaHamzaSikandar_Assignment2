@@ -1,0 +1,6 @@
+1. usertrap
+2. 7. It represents the SYS_exec system call number.
+3. User mode (SPP bit in sstatus is 0).
+4. lw a3, 0(zero). The register is a3.
+5. Address 0 is not mapped in the kernel page table, causing a Load Page Fault.
+6. Process name: initcode. PID: 1.

@@ -146,6 +146,9 @@ found:
   p->context.ra = (uint64)forkret;
   p->context.sp = p->kstack + PGSIZE;
 
+  p->syscall_mask = 0;
+  p->allowed_path[0] = '\0';
+
   return p;
 }
 
@@ -274,6 +277,8 @@ kfork(void)
     return -1;
   }
   np->sz = p->sz;
+  np->syscall_mask = p->syscall_mask;
+  memmove(np->allowed_path, p->allowed_path, MAXPATH);
 
   // copy saved user registers.
   *(np->trapframe) = *(p->trapframe);
